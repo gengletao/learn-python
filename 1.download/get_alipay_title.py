@@ -10,28 +10,36 @@ import os
 import sys
 import urllib
 
-def download_title():
-    fp = urllib.urlopen("http://www.alipay.com")
-    content = fp.read().decode('gb18030')
+def download_content(url):
+    fp = urllib.urlopen(url)
+    content = fp.read()
     fp.close()
-    front = content.find('<title>')
+    return content
+
+def get_expcontent(content,front_split,back_split):
+    front = content.find(front_split)
     if front < 0:
         return None
-    front += 7
+    front += len(front_split)
 
-    back = content.find('</title>')
+    back = content.find(back_split)
     if back < front:
         return None
 
     expcontent = content[front:back]
-
-    print expcontent
+    return expcontent
 
 def main():
     ''' main function
     '''
-    download_title()
+    url = 'http://www.alipay.com'
+    front_split = '<title>'
+    back_split = '</title>'
 
+    content = download_content(url).decode('gb18030')
+    expcontent = get_expcontent(content, front_split, back_split)
+
+    print expcontent
     print 'Done'
 
 if __name__ == '__main__':
