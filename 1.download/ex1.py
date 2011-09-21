@@ -12,6 +12,7 @@ import sys
 def main():
     ''' main function
     '''
+    #this is comment
     print "Hello World!"
     print "Hello Again"
     print "I like typing this."
