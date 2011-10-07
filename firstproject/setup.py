@@ -19,7 +19,7 @@ config = {
         'author_email': 'gengletao@gmail.com',
         'version': '0.1',
         'install_requires': ['nose'],
-        'packages': ['ex47'],
+        'packages': ['ex47', 'ex48'],
         'scripts': [],
         'name': 'firstproject'
         }
