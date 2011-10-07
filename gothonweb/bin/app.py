@@ -9,7 +9,7 @@
 import web
 
 urls = (
-        '/', 'index',
+        '/hello', 'Index',
         '/(.*)', 'hello'
         )
 
@@ -17,11 +17,27 @@ app = web.application(urls, globals())
 
 render = web.template.render('templates/')
 
-class index:
+class Index(object):
     def GET(self):
-        greeting = "Hello World"
-        # return render.index(greeting = greeting)
-        return render.foo()
+        return render.hello_form()
+
+    def POST(self):
+        form = web.input(name = "Nobody", greet = "Hello")
+        greeting = "%s, %s" % (form.greet, form.name)
+        return render.index(greeting = greeting)
+
+'''
+class Index(object):
+    def GET(self):
+        form = web.input(name = "Nobody", greet = None)
+
+        if form.greet:
+            greeting = "%s, %s" % (form.greet, form.name)
+            return render.index(greeting = greeting)
+            # return render.foo()
+        else:
+            return "ERROR: greet is required."
+'''
 
 class hello:
     def GET(self, name):
